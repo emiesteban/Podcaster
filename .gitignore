@@ -1,0 +1,10 @@
+# Dependency directories
+node_modules/
+# webpack
+dist/
+# vscode files
+.vscode/
+# dotenv environment variables file
+.env
+# package lock
+package-lock.json

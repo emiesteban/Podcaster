@@ -1,0 +1,26 @@
+{
+  "name": "podcaster",
+  "version": "1.0.0",
+  "description": "Mini-App to listen the 100 top 100 apple popular podcasts",
+  "main": "index.js",
+  "scripts": {
+    "start": "webpack --mode development",
+    "production": "webpack --mode production"
+  },
+  "author": "Emiliano",
+  "license": "ISC",
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "css-loader": "^6.7.3",
+    "dotenv": "^16.0.3",
+    "html-webpack-plugin": "^5.5.0",
+    "style-loader": "^3.3.2",
+    "ts-loader": "^9.4.2",
+    "typescript": "^5.0.2",
+    "webpack": "^5.76.3",
+    "webpack-cli": "^5.0.1"
+  }
+}
