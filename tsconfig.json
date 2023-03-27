@@ -2,12 +2,13 @@
     "compilerOptions": {
       "jsx": "react",
       "target": "es6",
-      "module": "es6",
-      "moduleResolution": "node",
+      "module": "CommonJS",
+      "moduleResolution": "NodeNext",
       "esModuleInterop": true,
       "sourceMap": true,
       "outDir": "./dist",
+      "types": ["node", "jest", "@testing-library/jest-dom"],
       "baseUrl": "."
     },
-    "include": ["./src/**/*"]
+    "include": ["./src/**/*", "setupTests.ts"]
 }
