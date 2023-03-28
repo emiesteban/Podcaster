@@ -1,10 +1,17 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+
 import Button from '../../atoms/button/Button';
 import Input from '../../atoms/input/Input';
 
 
 const Home = () => {
   const [searchText, setSearchText] = useState('');
+  const params = useParams();
+
+  useEffect(() => {
+    console.log('useParams', params)
+  }, [params]);
 
   return (
     <div className="home">
