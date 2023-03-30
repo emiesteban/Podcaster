@@ -1,5 +1,5 @@
 import React from "react";
-import PodcastProvider from "./components/contexts/PodcastContext";
+import PodcastProvider from "./contexts/PodcastContext";
 import AppRouter from "./routes/AppRouter";
 
 const App = () => {

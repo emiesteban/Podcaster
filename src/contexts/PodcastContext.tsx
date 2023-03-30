@@ -1,13 +1,6 @@
 import React from 'react';
+import { PodcastContextProps } from '../types/index';
 
-interface PodcastContextProps {
-    podcastList: {timestamp: number, list: any[]};
-    setPodcastList: React.Dispatch<React.SetStateAction<{}>>;
-    episodeList: {[key:string]: {timestamp: number, episode: {}}};
-    setEpisodeList: React.Dispatch<React.SetStateAction<{}>>;
-    search: string;
-    setSearch: React.Dispatch<React.SetStateAction<{}>>;
-}
 
 export const PodcastContext = React.createContext<PodcastContextProps>({
     podcastList: { timestamp: 0, list: []},
