@@ -1,7 +1,7 @@
 {
   "name": "podcaster",
   "version": "1.0.0",
-  "description": "Mini-App to listen the 100 top 100 apple popular podcasts",
+  "description": "Mini-App to listen the top 100 apple popular podcasts",
   "main": "index.js",
   "scripts": {
     "start": "webpack serve --open",
