@@ -6,15 +6,15 @@ export interface PodcastProps {
     summary: string;
 };
 
-export interface PodcastDetailsProps {
-
-};
-
 export interface PodcastContextProps {
     podcastList: {timestamp: number, list: PodcastProps[]};
     setPodcastList: React.Dispatch<React.SetStateAction<{}>>;
-    episodeList: {[key:string]: {timestamp: number, episode: {}}};
+    episodeList: {[key:string]: {timestamp: number, resultsCount: number, list: any[]}};
     setEpisodeList: React.Dispatch<React.SetStateAction<{}>>;
     search: string;
     setSearch: React.Dispatch<React.SetStateAction<{}>>;
+    loadingPodcasts: boolean;
+    setLoadingPodcasts: React.Dispatch<React.SetStateAction<{}>>;
+    loadingEpisodes: boolean;
+    setLoadingEpisodes: React.Dispatch<React.SetStateAction<{}>>;
 }

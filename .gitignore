@@ -1,5 +1,7 @@
 # Dependency directories
 node_modules/
+# coverage report
+coverage/
 # webpack
 dist/
 # vscode files

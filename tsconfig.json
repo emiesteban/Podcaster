@@ -1,14 +1,15 @@
 {
     "compilerOptions": {
       "jsx": "react",
-      "target": "es6",
+      "lib": ["ES2021"],
+      "target": "ES2021",
       "module": "CommonJS",
       "moduleResolution": "NodeNext",
       "esModuleInterop": true,
-      "sourceMap": true,
+      "sourceMap": false,
       "outDir": "./dist",
-      "types": ["node", "jest", "@testing-library/jest-dom"],
+      "types": ["node", "jest", "@testing-library/jest-dom","cypress"],
       "baseUrl": "."
     },
-    "include": ["./src/**/*", "setupTests.ts"]
+    "include": ["./src/**/*", "setupTests.ts", "./cypress/e2e/**/*"]
 }

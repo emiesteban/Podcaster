@@ -1,66 +1,35 @@
 import React, { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
+import { ClipLoader } from "react-spinners";
 import usePodcastContext from '../../../contexts/usePodcastContext';
-import PodcastListMock from '../../../mocks/PodcastListMock';
+import { yesterday } from '../../../helpers/datetime';
+import { getPodcastList } from '../../../services/apiRequests';
 import EpisodeDetails from '../../organisms/episodeDetail/EpisodeDetail';
 import PodcastDetails from '../../organisms/podcastDetails/PodcastDetails';
 import PodcastList from '../../organisms/podcastList/PodcastList';
 
 const Home = () => {
   const params = useParams();
-  const dayInMilliseconds = 86400000;
-  const yesterday = Date.now() - dayInMilliseconds;
   const {
           podcastList,
           setPodcastList,
           episodeList,
           setEpisodeList,
+          loadingEpisodes,
+          loadingPodcasts,
+          setLoadingPodcasts
   } = usePodcastContext();
 
   useEffect(() => {
-    console.log('useParams', params)
-  }, [params]);
-
-  const assemblePodcastList = ( listPodcast: any ) => {
-    const newPodcastList = [];    
-    listPodcast?.feed?.entry?.forEach((podcast: any) => {
-      newPodcastList.push({
-        id: podcast?.id?.attributes?.['im:id'],
-        image: podcast?.['im:image']?.[(podcast?.['im:image']).length-1]?.label,
-        name: podcast?.['im:name']?.label,
-        artist: podcast?.['im:artist']?.label,
-        summary: podcast?.summary?.label,
-      })
-    });
-    console.log('assemblePodcastList', newPodcastList)
-    return {list: newPodcastList, timestamp: Date.now()}
-  };
-
-  const getPodcastList = () => {
-    setPodcastList(assemblePodcastList(PodcastListMock));
-    console.log('getPodcastList')
-  };
-
-  const getEpisodeList = () => {
-    console.log('getEpisodeList')
-    // setEpisodeList({})
-  };
-
-  useEffect(() => {
     if ((podcastList?.timestamp || 0) < yesterday) {
-      getPodcastList();
+      getPodcastList({setPodcastList, setLoadingPodcasts});
     }
-    if (params?.podcastid && episodeList?.[params?.podcastid]?.timestamp || 0 < yesterday) {
-      getEpisodeList();
-    }
-
-    console.log('useParams', params)
   }, []);
 
   const view = () => {
     if (params?.episodeid !== undefined) {
         // episode with lateral podcast card
-        return <EpisodeDetails />;
+        return <EpisodeDetails podcastId={params.podcastid} episodeId={params.episodeid}/>;
     } else if (params?.podcastid !== undefined) {
         // episode list with lateral podcast card
         return <PodcastDetails podcastId={params.podcastid} />; 
@@ -71,7 +40,14 @@ const Home = () => {
 
   return (
     <div className="home">
-        <h1>Podcaster</h1>
+      <div className="header">
+        <div>
+          <h2><Link to={'/'}>Podcaster</Link></h2>
+        </div>
+        <div>
+          {(loadingEpisodes || loadingPodcasts) && <ClipLoader size={50} color={"#123abc"} />}
+        </div>
+      </div>
         {view()}
     </div>
   );

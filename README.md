@@ -52,10 +52,25 @@ Run the tests:
 ```sh
 npm run test
 ```
+Run the test-coverage:
 
-#### Schemas
+```sh
+npm run test:coverage
+```
 
-Not implemented yet, but must be located into `src/schema` folder
+Run the e2e tests:
+
+```sh
+npm run test:e2e
+```
+
+#### ToDo
+
+Schemas: Not implemented yet, but must be located into `src/schema` folder
+CSS: update css components or refactor views to a friendly view
+e2e: set the set of data, add some tests
+ally: update the components to be wcag 2.1 compliance
+CORS: add allorigins.win to avoid CORS errors, currently its working without incidents
 
 #### Endpoint
 

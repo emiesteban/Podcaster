@@ -9,12 +9,18 @@ export const PodcastContext = React.createContext<PodcastContextProps>({
     setEpisodeList: ()=>{},
     search: '',
     setSearch: ()=>{},
+    loadingPodcasts: false,
+    setLoadingPodcasts: ()=>{},
+    loadingEpisodes: false,
+    setLoadingEpisodes: ()=>{},
 });
 
 export default function PodcastProvider({children}) {
     const [podcastList, setPodcastList] = React.useState({ timestamp: 0, list: []});
 	const [episodeList, setEpisodeList] = React.useState({});
 	const [search, setSearch] = React.useState('');
+	const [loadingPodcasts, setLoadingPodcasts] = React.useState(false);
+	const [loadingEpisodes, setLoadingEpisodes] = React.useState(false);
 
     const contextValue = {
         podcastList,
@@ -23,6 +29,10 @@ export default function PodcastProvider({children}) {
         setEpisodeList,
         search,
         setSearch,
+        loadingPodcasts,
+        setLoadingPodcasts,
+        loadingEpisodes,
+        setLoadingEpisodes,
     };
 
     return (<PodcastContext.Provider value={contextValue}>
