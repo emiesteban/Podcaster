@@ -1,7 +1,8 @@
-import { useContext } from 'react';
-import { PodcastContext } from './PodcastContext';
+import { useContext } from 'react'
+import { type PodcastContextProps } from 'src/types'
+import { PodcastContext } from './PodcastContext'
 
-export default function usePodcastContext() {
-	const contextValue = useContext(PodcastContext);
-	return contextValue;
+export default function usePodcastContext(): PodcastContextProps {
+  const contextValue = useContext(PodcastContext)
+  return contextValue
 }

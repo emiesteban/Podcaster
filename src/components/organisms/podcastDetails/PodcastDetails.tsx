@@ -1,30 +1,29 @@
 import React from 'react';
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom'
 import usePodcastContext from '../../../contexts/usePodcastContext';
 import { mssecondsToTime, yesterday } from '../../../helpers/datetime';
 import { getEpisodeList } from '../../../services/apiRequests';
 import PodcastCard from '../../molecules/podcastCard/PodcastCard';
 import './PodcastDetails.css';
 
-
-const PodcastDetails = (({ podcastId }: {podcastId:string}) => {
+const PodcastDetails = ({ podcastId }: { podcastId: string }) => {
     const {
         podcastList,
         episodeList,
         setEpisodeList,
         setLoadingEpisodes
-    } = usePodcastContext();
+    } = usePodcastContext()
 
-    const filtered = podcastList?.list.filter((elem) => elem.id === podcastId) || []
+    const filtered = podcastList?.list.filter((elem) => elem.id === podcastId) || [];
 
-    React.useEffect(() => {
-        if (podcastId && episodeList?.[podcastId]?.timestamp || 0 < yesterday) {
-          getEpisodeList({podcastId, episodeList, setEpisodeList, setLoadingEpisodes});
-        }
-    }, [podcastId]);
+  React.useEffect(() => {
+        if (podcastId && episodeList?.[podcastId]?.timestamp || yesterday > 0) {
+      getEpisodeList({ podcastId, episodeList, setEpisodeList, setLoadingEpisodes })
+    }
+    }, [podcastId])
 
     return <>
-        {filtered && filtered.length == 1 && 
+        {filtered && filtered.length == 1 &&
             <div className="wrapper">
                 <PodcastCard podcast={filtered[0]} showSummary={true}/>
                 <div className="tableContainer">
@@ -40,10 +39,10 @@ const PodcastDetails = (({ podcastId }: {podcastId:string}) => {
                         <tbody>
                             {episodeList?.[podcastId]?.list && episodeList?.[podcastId]?.list.map(
                                 (episode) => <tr key={episode?.trackId}>
-                                        <td><Link to={`/podcast/${podcastId}/episode/${episode?.trackId}`} data-testid='episodelink'>{episode?.trackName}</Link></td>
-                                        <td>{(new Date(episode?.releaseDate)).toLocaleDateString()}</td>
-                                        <td>{mssecondsToTime(episode?.trackTimeMillis)}</td>
-                                    </tr>
+                                    <td><Link to={`/podcast/${podcastId}/episode/${episode?.trackId}`} data-testid='episodelink'>{episode?.trackName}</Link></td>
+                                    <td>{(new Date(episode?.releaseDate)).toLocaleDateString()}</td>
+                                    <td>{mssecondsToTime(episode?.trackTimeMillis)}</td>
+                                </tr>
                             )}
                             {!episodeList?.[podcastId]?.list &&
                                 <tr>
@@ -56,8 +55,8 @@ const PodcastDetails = (({ podcastId }: {podcastId:string}) => {
             </div>
         }
         {(!filtered || filtered.length !== 1) && <h1>Invalid Podcast</h1>}
-    </>
+    </>;
 
-});
+}
 
 export default PodcastDetails;
