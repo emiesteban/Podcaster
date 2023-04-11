@@ -1,0 +1,29 @@
+.header {
+    display: grid;
+    grid-template-columns: 95% 5%;
+}
+
+.home {
+    margin: auto;
+}
+
+.divider {
+    border-top: 1px solid #bbb;
+    margin: 5px 0;
+}
+
+.header-text {
+    margin: 8px 0;
+    font-weight: normal;
+    color: blueviolet;
+    font-family: "grotesk";
+    font-size: normal;
+    text-decoration: none;
+}
+
+.loader {
+    display: flex;
+    justify-content: flex-end;
+    margin: 15px 0px;
+    padding-right: 1em;
+}

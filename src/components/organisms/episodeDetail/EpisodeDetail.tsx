@@ -41,7 +41,7 @@ const EpisodeDetail = ({
   return (
     <div className="episodeDetailContainer">
       {filtered && filtered.length === 1 && (
-        <div className="episode">
+        <div className="episodeGrid">
           <PodcastCard podcast={filtered[0]} showSummary={true} />
           <div className="episodeTableContainer">
             {filteredEpisode[0] && (
