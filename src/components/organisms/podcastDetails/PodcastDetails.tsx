@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import usePodcastContext from '../../../contexts/usePodcastContext';
@@ -7,7 +8,7 @@ import usePodcastList from '../../../hooks/usePodcastList';
 import PodcastCard from '../../molecules/podcastCard/PodcastCard';
 import './PodcastDetails.css';
 
-const PodcastDetails = ({ podcastId }: { podcastId: string }) => {
+const PodcastDetails = ({ podcastId }: { podcastId: string }): JSX.Element => {
   const {
     podcastList,
     setPodcastList,
@@ -25,9 +26,9 @@ const PodcastDetails = ({ podcastId }: { podcastId: string }) => {
     usePodcastList(podcastList, setPodcastList, setLoadingPodcasts);
   }, []);
 
-return (
-    <div className='podcastDetailContainer'>
-      {filtered && filtered.length == 1 && (
+  return (
+    <div className="podcastDetailContainer">
+      {filtered && filtered.length === 1 && (
         <div className="detail">
           <PodcastCard podcast={filtered[0]} showSummary={true} />
           <div>
@@ -43,7 +44,9 @@ return (
               {episodeList?.[podcastId]?.list &&
                 episodeList?.[podcastId]?.list.map((episode, index) => (
                   <div className="row" key={episode?.trackId}>
-                    <div className={`firstcell ${index % 2 === 0 ? '' : 'pair'}`}>
+                    <div
+                      className={`firstcell ${index % 2 === 0 ? '' : 'pair'}`}
+                    >
                       <Link
                         to={`/podcast/${podcastId}/episode/${episode?.trackId}`}
                         data-testid="episodelink"

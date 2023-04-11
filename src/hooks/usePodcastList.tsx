@@ -7,7 +7,7 @@ const usePodcastList = (
   podcastList: PodcastListProps,
   setPodcastList: React.Dispatch<React.SetStateAction<{}>>,
   setLoadingPodcasts: React.Dispatch<React.SetStateAction<{}>>
-) => {
+): void => {
   if ((podcastList?.timestamp || yesterday - 1) < yesterday) {
     setLoadingPodcasts(true);
     const cachedPodcasts = localStorage.getItem('topPodcasts');

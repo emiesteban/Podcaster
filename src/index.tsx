@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
 import React from 'react';
 import * as ReactDOMClient from 'react-dom/client';
 import App from './App';

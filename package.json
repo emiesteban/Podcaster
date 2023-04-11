@@ -13,8 +13,7 @@
         "test:e2e": "cypress run",
         "lint": "eslint **/*.{ts,tsx} --no-error-on-unmatched-pattern",
         "lint:fix": "eslint **/*.{ts,tsx} --no-error-on-unmatched-pattern --fix",
-        "format": "npx prettier --write",
-        "jest": "jest ./src/components/organisms/podcastDetails/podcastDetails"
+        "format": "npx prettier --write"
     },
     "author": "Emiliano",
     "license": "ISC",

@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
 import React, { createContext, useState, type ReactNode } from 'react';
 import { type PodcastContextProps } from '../types/index';
 

@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
 import React, { useEffect } from 'react';
 import usePodcastContext from '../../../contexts/usePodcastContext';
 import usePodcastList from '../../../hooks/usePodcastList';
@@ -6,7 +7,7 @@ import Input from '../../atoms/input/Input';
 import PodcastCard from '../../molecules/podcastCard/PodcastCard';
 import './PodcastList.css';
 
-const PodcastList = () => {
+const PodcastList = (): JSX.Element => {
   const { podcastList, search, setSearch, setPodcastList, setLoadingPodcasts } =
     usePodcastContext();
 
@@ -35,12 +36,11 @@ const PodcastList = () => {
       </div>
       <div className="wrapper">
         {(!filteredList || filteredList.length === 0) && <h1> No results</h1>}
-        {filteredList &&
-          filteredList.map((elem: PodcastProps) => (
-            <div key={elem.id} data-testid="podcast-card">
-              <PodcastCard podcast={elem} showSummary={false} />
-            </div>
-          ))}
+        {filteredList?.map((elem: PodcastProps) => (
+          <div key={elem.id} data-testid="podcast-card">
+            <PodcastCard podcast={elem} showSummary={false} />
+          </div>
+        ))}
       </div>
     </>
   );

@@ -8,7 +8,7 @@ const useEpisodeList = (
   episodeList: PodcastEpisodeListProps,
   setEpisodeList: React.Dispatch<React.SetStateAction<{}>>,
   setLoadingEpisodes: React.Dispatch<React.SetStateAction<{}>>
-) => {
+): void => {
   if (
     podcastId &&
     (episodeList?.[podcastId]?.timestamp || yesterday - 1) < yesterday
@@ -17,7 +17,6 @@ const useEpisodeList = (
     const cachedEpisodes = localStorage.getItem('topEpisodes');
     const parsedEpisodes = cachedEpisodes ? JSON.parse(cachedEpisodes) : [];
     if (parsedEpisodes?.[podcastId]?.timestamp || yesterday - 1 < yesterday) {
-      let newList;
       getEpisodeList(podcastId)
         ?.then((data) => {
           const newEpisodeList = {

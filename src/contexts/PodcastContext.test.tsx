@@ -1,6 +1,7 @@
 import '@testing-library/jest-dom/extend-expect';
 
 import { fireEvent, render, waitFor } from '@testing-library/react';
+// eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
 import React from 'react';
 import PodcastProvider, { PodcastContext } from './PodcastContext';
 
@@ -45,7 +46,7 @@ describe('PodcastProvider', () => {
     );
 
     fireEvent.click(getByText('Update Podcast List'));
-    waitFor(() => {
+    void waitFor(() => {
       expect(getByText('Test Podcast')).toBeInTheDocument();
     });
   });

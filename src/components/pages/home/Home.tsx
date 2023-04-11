@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
 import React from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { ClipLoader } from 'react-spinners';
@@ -7,11 +8,11 @@ import PodcastDetails from '../../organisms/podcastDetails/PodcastDetails';
 import PodcastList from '../../organisms/podcastList/PodcastList';
 import './Home.css';
 
-const Home = () => {
+const Home = (): JSX.Element => {
   const params = useParams();
   const { loadingEpisodes, loadingPodcasts } = usePodcastContext();
 
-  const view = () => {
+  const view = (): JSX.Element => {
     if (params?.episodeid !== undefined && params?.podcastid !== undefined) {
       // episode with lateral podcast card
       return (

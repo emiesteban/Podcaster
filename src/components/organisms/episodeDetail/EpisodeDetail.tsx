@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
 import React, { useEffect } from 'react';
 import usePodcastContext from '../../../contexts/usePodcastContext';
 import useEpisodeList from '../../../hooks/useEpisodeList';
@@ -11,7 +12,7 @@ const EpisodeDetail = ({
 }: {
   podcastId: string;
   episodeId: string;
-}) => {
+}): JSX.Element => {
   const {
     podcastList,
     setPodcastList,
@@ -33,13 +34,13 @@ const EpisodeDetail = ({
     usePodcastList(podcastList, setPodcastList, setLoadingPodcasts);
   }, []);
 
-  const createMarkup = () => {
+  const createMarkup = (): { __html: string } => {
     return { __html: filteredEpisode[0]?.description };
   };
 
   return (
-    <div className='episodeDetailContainer'>
-      {filtered && filtered.length == 1 && (
+    <div className="episodeDetailContainer">
+      {filtered && filtered.length === 1 && (
         <div className="episode">
           <PodcastCard podcast={filtered[0]} showSummary={true} />
           <div className="episodeTableContainer">

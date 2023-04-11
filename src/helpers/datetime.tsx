@@ -2,9 +2,9 @@ export const dayInMilliseconds = 86400000;
 
 export const yesterday = Date.now() - dayInMilliseconds;
 
-export const mssecondsToTime = (s: number) => {
-  const addZ = (n: number) => {
-    return (n < 10 ? '0' : '') + n;
+export const mssecondsToTime = (s: number): string => {
+  const addZ = (n: number): string => {
+    return `${n < 10 ? '0' : ''}${n}`;
   };
   const ms = s % 1000;
   s = (s - ms) / 1000;

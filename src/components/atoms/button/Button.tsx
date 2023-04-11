@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
 import React, { type ReactNode } from 'react';
 import './Button.css';
 
@@ -7,7 +8,11 @@ interface ButtonProps {
   disabled?: boolean;
 }
 
-const Button = ({ children, onClick, disabled = false }: ButtonProps) => {
+const Button = ({
+  children,
+  onClick,
+  disabled = false,
+}: ButtonProps): JSX.Element => {
   return (
     <button
       className={`button ${disabled ? 'button-disabled' : ''}`}

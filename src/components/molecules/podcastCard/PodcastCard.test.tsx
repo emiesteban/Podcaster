@@ -1,4 +1,5 @@
 import { render } from '@testing-library/react';
+// eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
 import React from 'react';
 import { type PodcastProps } from '../../../types/index';
 import PodcastCard from './PodcastCard';

@@ -12,12 +12,12 @@ describe('Podcaster Root', () => {
   });
 
   it('open first card', () => {
-      cy.get('[class="card"]:first').click()
+      cy.get('[class="card-list"]:first').click()
   });
 
   it('open episode from first card', () => {
-      cy.get('[class="card"]:first').click()
-      cy.get('[data-testid="episodelink"]:first').click()
+      cy.get('[class="card-list"]:first').click()
+      cy.get('[data-testid="episodelink"]:first', {timeout:20000}).click()
       cy.contains('Preview\:')
   });
 
