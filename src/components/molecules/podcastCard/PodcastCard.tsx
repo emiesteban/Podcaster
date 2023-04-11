@@ -25,14 +25,12 @@ const PodcastCard = ({
           <p className="name-list">{podcast.name}</p>
         </div>
       </Link>
-      <div className="container">
-        {showSummary && (
-          <>
-            <hr />
-            <p>{podcast.summary}</p>
-          </>
-        )}
-      </div>
+      {showSummary && (
+        <div className='summary'>
+          <hr />
+          <p>{podcast.summary}</p>
+        </div>
+      )}
     </div>
   );
 };

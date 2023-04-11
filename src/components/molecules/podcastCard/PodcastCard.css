@@ -6,17 +6,14 @@
   height: 10em;
   width: 15em;
   margin-top: 30%;
-    /* 5px rounded corners */
 }
 
 .card {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   transition: 0.3s;
   border-radius: 5px;
-  /* 5px rounded corners */
 }
 
-/* Add rounded corners to the top left and the top right corner of the image */
 img {
   border-radius: 5px 5px 0 0;
 }
@@ -26,7 +23,11 @@ img {
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
 }
 
-/* Add some padding inside the card container */
+.container {
+    width: 16vw;
+    padding: 1em;
+}
+
 .container-list {
   position: absolute;
   bottom: 0px;
@@ -39,6 +40,10 @@ img {
 
 a:link, a:visited, a:active {
   text-decoration: none;
+}
+
+.summary {
+  padding: 1em;
 }
 
 .card-avatar-grid {

@@ -1,5 +1,21 @@
+.episodeDetailContainer {
+    margin: auto;
+    width: 80%;
+}
+
 .episode {
     display: grid;
     width: 100%;
     grid-template-columns: 20% 80%;
-  }
+    grid-gap: 4em;
+}
+
+.episodeTableContainer {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    transition: 0.3s;
+    padding: 1em;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    border-collapse: collapse;
+}

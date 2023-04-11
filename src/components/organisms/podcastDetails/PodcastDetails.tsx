@@ -25,56 +25,51 @@ const PodcastDetails = ({ podcastId }: { podcastId: string }) => {
     usePodcastList(podcastList, setPodcastList, setLoadingPodcasts);
   }, []);
 
-  return (
-    <>
+return (
+    <div className='podcastDetailContainer'>
       {filtered && filtered.length == 1 && (
         <div className="detail">
           <PodcastCard podcast={filtered[0]} showSummary={true} />
-          <div className="tableContainer">
-            <table className="table">
-              <thead>
-                <tr>
-                  <th colSpan={3}>
-                    Episodes: {episodeList[podcastId]?.resultsCount}{' '}
-                  </th>
-                </tr>
-                <tr>
-                  <th>Title</th>
-                  <th>Date</th>
-                  <th>Duration</th>
-                </tr>
-              </thead>
-              <tbody>
-                {episodeList?.[podcastId]?.list &&
-                  episodeList?.[podcastId]?.list.map((episode) => (
-                    <tr key={episode?.trackId}>
-                      <td>
-                        <Link
-                          to={`/podcast/${podcastId}/episode/${episode?.trackId}`}
-                          data-testid="episodelink"
-                        >
-                          {episode?.trackName}
-                        </Link>
-                      </td>
-                      <td>
-                        {new Date(episode?.releaseDate).toLocaleDateString()}
-                      </td>
-                      <td>{mssecondsToTime(episode?.trackTimeMillis)}</td>
-                    </tr>
-                  ))}
-                {!episodeList?.[podcastId]?.list && (
-                  <tr>
-                    <td>EPISODE LIST NOT AVAILABLE</td>
-                  </tr>
-                )}
-              </tbody>
-            </table>
+          <div>
+            <div className="episodeCount">
+              Episodes: {episodeList[podcastId]?.resultsCount}
+            </div>
+            <div className="podcastTableContainer">
+              <div className="row">
+                <div className="firsttitlecell">Title</div>
+                <div className="titlecell">Date</div>
+                <div className="titlecell">Duration</div>
+              </div>
+              {episodeList?.[podcastId]?.list &&
+                episodeList?.[podcastId]?.list.map((episode) => (
+                  <div className="row" key={episode?.trackId}>
+                    <div className="firstcell">
+                      <Link
+                        to={`/podcast/${podcastId}/episode/${episode?.trackId}`}
+                        data-testid="episodelink"
+                      >
+                        {episode?.trackName}
+                      </Link>
+                    </div>
+                    <div className="cell">
+                      {new Date(episode?.releaseDate).toLocaleDateString()}
+                    </div>
+                    <div className="cell">
+                      {mssecondsToTime(episode?.trackTimeMillis)}
+                    </div>
+                  </div>
+                ))}
+              {!episodeList?.[podcastId]?.list && (
+                <div>
+                  <p>EPISODE LIST NOT AVAILABLE</p>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       )}
       {(!filtered || filtered.length !== 1) && <h1>Invalid Podcast</h1>}
-    </>
+    </div>
   );
 };
-
 export default PodcastDetails;
