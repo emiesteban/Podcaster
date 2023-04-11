@@ -41,9 +41,9 @@ return (
                 <div className="titlecell">Duration</div>
               </div>
               {episodeList?.[podcastId]?.list &&
-                episodeList?.[podcastId]?.list.map((episode) => (
+                episodeList?.[podcastId]?.list.map((episode, index) => (
                   <div className="row" key={episode?.trackId}>
-                    <div className="firstcell">
+                    <div className={`firstcell ${index % 2 === 0 ? '' : 'pair'}`}>
                       <Link
                         to={`/podcast/${podcastId}/episode/${episode?.trackId}`}
                         data-testid="episodelink"
@@ -51,10 +51,10 @@ return (
                         {episode?.trackName}
                       </Link>
                     </div>
-                    <div className="cell">
+                    <div className={`cell ${index % 2 === 0 ? '' : 'pair'}`}>
                       {new Date(episode?.releaseDate).toLocaleDateString()}
                     </div>
-                    <div className="cell">
+                    <div className={`cell ${index % 2 === 0 ? '' : 'pair'}`}>
                       {mssecondsToTime(episode?.trackTimeMillis)}
                     </div>
                   </div>
