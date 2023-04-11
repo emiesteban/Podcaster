@@ -30,8 +30,8 @@ img {
 }
 
 .container {
-    width: 16vw;
-    padding: 1em;
+  word-break: break-all;
+  padding: 1em;
 }
 
 .container-list {
@@ -55,14 +55,13 @@ a:link, a:visited, a:active {
 .card-avatar-grid {
   width: 9em;
   height: 9em;
-  border-radius: 150px;
+  border-radius: 50%;
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
-  bottom: 80%;
+  bottom: 85%;
   margin: auto;
-  padding-bottom: 1em;
 }
 
 .name-list {

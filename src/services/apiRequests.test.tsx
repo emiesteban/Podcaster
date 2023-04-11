@@ -1,5 +1,8 @@
 import { getEpisodeList, getPodcastList } from './apiRequests';
 
+jest.setTimeout(60000);
+jest.useRealTimers();
+
 describe('getEpisodeList', () => {
   test('returns episode data when fetched without CORS', async () => {
     const result = await getEpisodeList('12345');

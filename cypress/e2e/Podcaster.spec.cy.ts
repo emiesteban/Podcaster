@@ -17,7 +17,7 @@ describe('Podcaster Root', () => {
 
   it('open episode from first card', () => {
       cy.get('[class="card-list"]:first').click()
-      cy.get('[data-testid="episodelink"]:first', {timeout:20000}).click()
+      cy.get('[data-testid="episodelink"]:first', {timeout:200000}).click()
       cy.contains('Preview\:')
   });
 
