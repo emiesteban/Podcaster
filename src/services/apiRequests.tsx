@@ -1,31 +1,36 @@
-import { assembleEpisodeList, assemblePodcastList } from '../helpers/datamanagement'
-
-export const getEpisodeList = async (
-  { podcastId, episodeList, setEpisodeList, setLoadingEpisodes }:
-  { podcastId: string, episodeList: {}, setEpisodeList: React.Dispatch<React.SetStateAction<{}>>, setLoadingEpisodes: React.Dispatch<React.SetStateAction<{}>> }
-) => {
-    setLoadingEpisodes(true);
+export const getEpisodeList = async (podcastId: string) => {
   const episodeurl = `https://itunes.apple.com/lookup?id=${podcastId}&media=podcast&entity=podcastEpisode&limit=20`;
-  // const episodeurl= `https://api.allorigins.win/get?url=${encodeURIComponent(episodeurlbase)}`
+  const episodeurlCORS = `https://api.allorigins.win/get?url=${encodeURIComponent(
+    episodeurl
+  )}`;
+
+  try {
     const response = await fetch(episodeurl);
-  const data = await response.json();
-  const newEpisodeList = {
-    ...episodeList,
-    [podcastId]: assembleEpisodeList(data)
-    };
-    setEpisodeList(newEpisodeList)
-  setLoadingEpisodes(false);
-}
+    const data = await response.json();
+    return data;
+  } catch {
+    console.error('Error fetching Episode List without CORS');
+  }
+  try {
+    const response = await fetch(episodeurlCORS);
+    const data = await response.json();
+    return JSON.parse(data.contents);
+  } catch {
+    console.error('Error fetching Episode List using CORS provider');
+    return {};
+  }
+};
 
-const podcasturl = 'https://itunes.apple.com/us/rss/toppodcasts/limit=100/genre=1310/json';
+const podcasturl =
+  'https://itunes.apple.com/us/rss/toppodcasts/limit=100/genre=1310/json';
 
-export const getPodcastList = async (
-    { setPodcastList, setLoadingPodcasts }:
-  { setPodcastList: React.Dispatch<React.SetStateAction<{}>>, setLoadingPodcasts: React.Dispatch<React.SetStateAction<{}>> }
-) => {
-  setLoadingPodcasts(true);
+export const getPodcastList = async () => {
+  try {
     const response = await fetch(podcasturl);
     const data = await response.json();
-    setPodcastList(assemblePodcastList(data));
-    setLoadingPodcasts(false);
-}
+    return data;
+  } catch {
+    console.error('Error fetching Podcast List');
+    return {};
+  }
+};

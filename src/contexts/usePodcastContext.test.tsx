@@ -1,7 +1,7 @@
-import { renderHook } from '@testing-library/react'
-import React from 'react'
-import { PodcastContext } from './PodcastContext'
-import usePodcastContext from './usePodcastContext'
+import { renderHook } from '@testing-library/react';
+import React from 'react';
+import { PodcastContext } from './PodcastContext';
+import usePodcastContext from './usePodcastContext';
 
 describe('usePodcastContext', () => {
   it('should return the context value', () => {
@@ -15,17 +15,19 @@ describe('usePodcastContext', () => {
       loadingPodcasts: false,
       setLoadingPodcasts: () => {},
       loadingEpisodes: false,
-      setLoadingEpisodes: () => {}
-    }
+      setLoadingEpisodes: () => {},
+    };
 
-    const wrapper = ({ children }: React.PropsWithChildren<{}>): JSX.Element => (
+    const wrapper = ({
+      children,
+    }: React.PropsWithChildren<{}>): JSX.Element => (
       <PodcastContext.Provider value={expected}>
         {children}
       </PodcastContext.Provider>
-    )
+    );
 
-    const { result } = renderHook(() => usePodcastContext(), { wrapper })
+    const { result } = renderHook(() => usePodcastContext(), { wrapper });
 
-    expect(result.current).toBe(expected)
-  })
-})
+    expect(result.current).toBe(expected);
+  });
+});

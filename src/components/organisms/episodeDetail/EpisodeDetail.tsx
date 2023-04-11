@@ -1,46 +1,46 @@
-import React from 'react'
-import usePodcastContext from '../../../contexts/usePodcastContext'
-import { yesterday } from '../../../helpers/datetime'
-import { getEpisodeList } from '../../../services/apiRequests'
-import PodcastCard from '../../molecules/podcastCard/PodcastCard'
-import './EpisodeDetail.css'
+import React, { useEffect } from 'react';
+import usePodcastContext from '../../../contexts/usePodcastContext';
+import useEpisodeList from '../../../hooks/useEpisodeList';
+import usePodcastList from '../../../hooks/usePodcastList';
+import PodcastCard from '../../molecules/podcastCard/PodcastCard';
+import './EpisodeDetail.css';
 
 const EpisodeDetail = ({
   podcastId,
   episodeId,
 }: {
-  podcastId?: string
-  episodeId?: string
+  podcastId: string;
+  episodeId: string;
 }) => {
-  const { podcastList, episodeList, setEpisodeList, setLoadingEpisodes } =
-    usePodcastContext()
+  const {
+    podcastList,
+    setPodcastList,
+    episodeList,
+    setEpisodeList,
+    setLoadingEpisodes,
+    setLoadingPodcasts,
+  } = usePodcastContext();
 
   const filtered =
-    podcastList?.list.filter((elem) => elem.id === podcastId) || []
+    podcastList?.list.filter((elem) => elem.id === podcastId) || [];
   const filteredEpisode =
     episodeList?.[podcastId || 0]?.list.filter(
       (elem) => elem.trackId === parseInt(episodeId || '0')
-    ) || []
+    ) || [];
 
-  React.useEffect(() => {
-    if (podcastId && (episodeList?.[podcastId]?.timestamp || 0) < yesterday) {
-      getEpisodeList({
-        podcastId,
-        episodeList,
-        setEpisodeList,
-        setLoadingEpisodes,
-      })
-    }
-  }, [podcastId])
+  useEffect(() => {
+    useEpisodeList(podcastId, episodeList, setEpisodeList, setLoadingEpisodes);
+    usePodcastList(podcastList, setPodcastList, setLoadingPodcasts);
+  }, []);
 
   const createMarkup = () => {
-    return { __html: filteredEpisode[0]?.description }
-  }
+    return { __html: filteredEpisode[0]?.description };
+  };
 
   return (
     <>
       {filtered && filtered.length == 1 && (
-        <div className="wrapper">
+        <div className="episode">
           <PodcastCard podcast={filtered[0]} showSummary={true} />
           <div className="tableContainer">
             {filteredEpisode[0] && (
@@ -65,7 +65,7 @@ const EpisodeDetail = ({
       )}
       {(!filtered || filtered.length !== 1) && <h1>Invalid Podcast</h1>}
     </>
-  )
-}
+  );
+};
 
-export default EpisodeDetail
+export default EpisodeDetail;

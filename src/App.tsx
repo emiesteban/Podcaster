@@ -1,6 +1,6 @@
-import React from 'react'
-import PodcastProvider from './contexts/PodcastContext'
-import AppRouter from './routes/AppRouter'
+import React from 'react';
+import PodcastProvider from './contexts/PodcastContext';
+import AppRouter from './routes/AppRouter';
 
 const App = () => {
   return (
@@ -9,7 +9,7 @@ const App = () => {
         <AppRouter />
       </PodcastProvider>
     </div>
-  )
-}
+  );
+};
 
-export default App
+export default App;

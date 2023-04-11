@@ -1,8 +1,8 @@
-import '@testing-library/jest-dom/extend-expect'
+import '@testing-library/jest-dom/extend-expect';
 
-import { fireEvent, render, waitFor } from '@testing-library/react'
-import React from 'react'
-import PodcastProvider, { PodcastContext } from './PodcastContext'
+import { fireEvent, render, waitFor } from '@testing-library/react';
+import React from 'react';
+import PodcastProvider, { PodcastContext } from './PodcastContext';
 
 describe('PodcastProvider', () => {
   test('should render children', () => {
@@ -10,10 +10,10 @@ describe('PodcastProvider', () => {
       <PodcastProvider>
         <div data-testid="test-child" />
       </PodcastProvider>
-    )
+    );
 
-    expect(getByTestId('test-child')).toBeInTheDocument()
-  })
+    expect(getByTestId('test-child')).toBeInTheDocument();
+  });
 
   test('should update the podcastList when setPodcastList is called', () => {
     const { getByText } = render(
@@ -23,8 +23,8 @@ describe('PodcastProvider', () => {
             podcastList,
             setPodcastList,
           }: {
-            podcastList: any
-            setPodcastList: any
+            podcastList: any;
+            setPodcastList: any;
           }) => (
             <>
               <h1 data-testid="artist">{podcastList?.list[0]?.artist}</h1>
@@ -33,7 +33,7 @@ describe('PodcastProvider', () => {
                   setPodcastList({
                     timestamp: 1,
                     list: [{ id: 1, artist: 'Test Podcast' }],
-                  })
+                  });
                 }}
               >
                 Update Podcast List
@@ -42,11 +42,11 @@ describe('PodcastProvider', () => {
           )}
         </PodcastContext.Consumer>
       </PodcastProvider>
-    )
+    );
 
-    fireEvent.click(getByText('Update Podcast List'))
+    fireEvent.click(getByText('Update Podcast List'));
     waitFor(() => {
-      expect(getByText('Test Podcast')).toBeInTheDocument()
-    })
-  })
-})
+      expect(getByText('Test Podcast')).toBeInTheDocument();
+    });
+  });
+});

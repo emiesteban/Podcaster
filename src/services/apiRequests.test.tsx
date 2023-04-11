@@ -1,69 +1,40 @@
-import { assembleEpisodeList, assemblePodcastList } from '../helpers/datamanagement'
-import EpisodeListMock from '../mocks/EpisodeListMock'
-import { getEpisodeList, getPodcastList } from './apiRequests'
+import { getEpisodeList, getPodcastList } from './apiRequests';
 
-jest.mock('../helpers/datamanagement', () => ({
-  __esModule: true,
-  assembleEpisodeList: jest.fn(),
-  assemblePodcastList: jest.fn()
-}))
+describe('getEpisodeList', () => {
+  test('returns episode data when fetched without CORS', async () => {
+    const result = await getEpisodeList('12345');
+    expect(result).toBeDefined();
+  });
 
-describe('Test getEpisodeList function', () => {
-  test('should return updated episode list', async () => {
-    const podcastId = '123'
-    const data = EpisodeListMock
-    const episodeList = {}
-    const setEpisodeList = jest.fn()
-    const setLoadingEpisodes = jest.fn()
+  test('logs an error when there is an error fetching without CORS', async () => {
+    jest.spyOn(global, 'fetch').mockRejectedValueOnce('');
+    console.error = jest.fn();
+    await getEpisodeList('invalid-id');
+    expect(console.error).toHaveBeenCalledWith(
+      'Error fetching Episode List without CORS'
+    );
+  });
 
-    // mock fetch
-    global.fetch = jest.fn(async () =>
-      await Promise.resolve({
-        headers: {},
-        ok: true,
-        redirected: false,
-        status: 200,
-        statusText: 'OK',
-        json: async () => await Promise.resolve(data)
-      } as unknown as Response)
-    )
+  test('logs an error when there is an error fetching using CORS provider', async () => {
+    jest.spyOn(global, 'fetch').mockRejectedValue('');
+    console.error = jest.fn();
+    await getEpisodeList('invalid-id');
+    expect(console.error).toHaveBeenCalledWith(
+      'Error fetching Episode List using CORS provider'
+    );
+  });
+});
 
-    // invoke function
-    await getEpisodeList({ podcastId, episodeList, setEpisodeList, setLoadingEpisodes })
+describe('getPodcastList', () => {
+  test('returns podcast data when fetched', async () => {
+    const result = await getPodcastList();
+    expect(result).toBeDefined();
+  });
 
-    expect(setLoadingEpisodes).toHaveBeenCalledWith(true)
-    expect(global.fetch).toHaveBeenCalledWith(`https://itunes.apple.com/lookup?id=${podcastId}&media=podcast&entity=podcastEpisode&limit=20`)
-    expect(assembleEpisodeList).toHaveBeenCalledWith(data)
-    expect(setEpisodeList).toHaveBeenCalledWith({ [podcastId]: assembleEpisodeList(data) })
-    expect(setLoadingEpisodes).toHaveBeenCalledWith(false)
-  })
-})
-
-describe('Test getPodcastList function', () => {
-  test('should return updated podcast list', async () => {
-    const data = { /* mocked response from fetch */ }
-    const setPodcastList = jest.fn()
-    const setLoadingPodcasts = jest.fn()
-
-    // mock fetch
-    global.fetch = jest.fn(async () =>
-      await Promise.resolve({
-        headers: {},
-        ok: true,
-        redirected: false,
-        status: 200,
-        statusText: 'OK',
-        json: async () => await Promise.resolve(data)
-      } as unknown as Response)
-    )
-
-    // invoke function
-    await getPodcastList({ setPodcastList, setLoadingPodcasts })
-
-    expect(setLoadingPodcasts).toHaveBeenCalledWith(true)
-    expect(global.fetch).toHaveBeenCalledWith('https://itunes.apple.com/us/rss/toppodcasts/limit=100/genre=1310/json')
-    expect(assemblePodcastList).toHaveBeenCalledWith(data)
-    expect(setPodcastList).toHaveBeenCalledWith(assemblePodcastList(data))
-    expect(setLoadingPodcasts).toHaveBeenCalledWith(false)
-  })
-})
+  test('logs an error when there is an error fetching podcast data', async () => {
+    jest.spyOn(global, 'fetch').mockRejectedValue('');
+    console.error = jest.fn();
+    await getPodcastList();
+    expect(console.error).toHaveBeenCalledWith('Error fetching Podcast List');
+  });
+});

@@ -1,5 +1,5 @@
-import React, { createContext, useState, type ReactNode } from 'react'
-import { type PodcastContextProps } from '../types/index'
+import React, { createContext, useState, type ReactNode } from 'react';
+import { type PodcastContextProps } from '../types/index';
 
 export const PodcastContext = createContext<PodcastContextProps>({
   podcastList: { timestamp: 0, list: [] },
@@ -11,24 +11,24 @@ export const PodcastContext = createContext<PodcastContextProps>({
   loadingPodcasts: false,
   setLoadingPodcasts: () => {},
   loadingEpisodes: false,
-  setLoadingEpisodes: () => {}
-})
+  setLoadingEpisodes: () => {},
+});
 
 interface PodcastProviderProps {
-  children: ReactNode
+  children: ReactNode;
 }
 
-export default function PodcastProvider ({
-  children
+export default function PodcastProvider({
+  children,
 }: PodcastProviderProps): JSX.Element {
   const [podcastList, setPodcastList] = useState<any>({
     timestamp: 0,
-    list: []
-  })
-  const [episodeList, setEpisodeList] = useState<any>({})
-  const [search, setSearch] = useState<any>('')
-  const [loadingPodcasts, setLoadingPodcasts] = useState<any>(false)
-  const [loadingEpisodes, setLoadingEpisodes] = useState<any>(false)
+    list: [],
+  });
+  const [episodeList, setEpisodeList] = useState<any>({});
+  const [search, setSearch] = useState<any>('');
+  const [loadingPodcasts, setLoadingPodcasts] = useState<any>(false);
+  const [loadingEpisodes, setLoadingEpisodes] = useState<any>(false);
 
   const contextValue: PodcastContextProps = {
     podcastList,
@@ -40,12 +40,12 @@ export default function PodcastProvider ({
     loadingPodcasts,
     setLoadingPodcasts,
     loadingEpisodes,
-    setLoadingEpisodes
-  }
+    setLoadingEpisodes,
+  };
 
   return (
     <PodcastContext.Provider value={contextValue}>
       {children}
     </PodcastContext.Provider>
-  )
+  );
 }
